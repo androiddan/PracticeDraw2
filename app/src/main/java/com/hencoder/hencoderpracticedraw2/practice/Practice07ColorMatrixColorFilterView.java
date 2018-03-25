@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -38,6 +40,11 @@ public class Practice07ColorMatrixColorFilterView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        ColorMatrix colorMatrix=new ColorMatrix();
+        //保持了0.3的饱和度，依然会看出一点彩色部分，0表示完全去掉饱和度
+        colorMatrix.setSaturation(0.3f);
+        ColorMatrixColorFilter filter=new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(filter);
         canvas.drawBitmap(bitmap, 0, 0, paint);
     }
 }
