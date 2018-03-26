@@ -30,8 +30,12 @@ public class Practice16TextPathView extends View {
         paint.setTextSize(120);
 
         // 使用 Paint.getTextPath() 来获取文字的 Path
+        paint.getTextPath(text, 0, text.length(), 50, 200, textPath);
 
         pathPaint.setStyle(Paint.Style.STROKE);
+
+        //貌似所有 ‘获取绘制的 Path’ 的方法都需要关闭硬件加速？？？？
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
@@ -40,6 +44,9 @@ public class Practice16TextPathView extends View {
 
         canvas.drawText(text, 50, 200, paint);
 
+        canvas.save();
+        canvas.translate(0,200);
         canvas.drawPath(textPath, pathPaint);
+        canvas.restore();
     }
 }
